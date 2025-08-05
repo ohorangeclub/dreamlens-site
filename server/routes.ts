@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { interpretDreamSchema } from "@shared/schema";
-import { interpretDreamWithAI } from "./services/openai";
+import { interpretDreamWithAI } from "./services/gemini";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Interpret dream

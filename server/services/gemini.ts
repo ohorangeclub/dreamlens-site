@@ -1,9 +1,12 @@
-import OpenAI from "openai";
+import { GoogleGenAI } from "@google/genai";
 
-// the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = new OpenAI({ 
-  apiKey: process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY_ENV_VAR || "your-api-key-here"
-});
+// DON'T DELETE THIS COMMENT
+// Follow these instructions when using this blueprint:
+// - Note that the newest Gemini model series is "gemini-2.5-flash" or gemini-2.5-pro"
+//   - do not change this unless explicitly requested by the user
+
+// This API key is from Gemini Developer API Key, not vertex AI API Key
+const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "your-gemini-api-key-here" });
 
 export interface DreamInterpretationResult {
   interpretation: string;
@@ -41,21 +44,27 @@ Approach the interpretation from a positive and constructive perspective, and wr
     : `Please interpret the following dream:\n\n${dreamText}`;
 
   try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt }
-      ],
-      response_format: { type: "json_object" },
-      temperature: 0.7,
-      max_tokens: 1000,
+    const response = await genai.models.generateContent({
+      model: "gemini-2.5-flash",
+      config: {
+        systemInstruction: systemPrompt,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            interpretation: { type: "string" },
+            warmMessage: { type: "string" },
+          },
+          required: ["interpretation", "warmMessage"],
+        },
+      },
+      contents: userPrompt,
     });
 
-    const result = JSON.parse(response.choices[0].message.content || "{}");
+    const result = JSON.parse(response.text || "{}");
     
     if (!result.interpretation || !result.warmMessage) {
-      throw new Error("Invalid response format from OpenAI");
+      throw new Error("Invalid response format from Gemini");
     }
 
     return {
@@ -63,7 +72,7 @@ Approach the interpretation from a positive and constructive perspective, and wr
       warmMessage: result.warmMessage,
     };
   } catch (error) {
-    console.error("OpenAI API error:", error);
+    console.error("Gemini API error:", error);
     throw new Error("Failed to interpret dream. Please try again later.");
   }
 }
