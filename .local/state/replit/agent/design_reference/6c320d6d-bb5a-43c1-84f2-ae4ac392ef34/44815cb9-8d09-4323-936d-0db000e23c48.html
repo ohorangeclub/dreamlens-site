@@ -1,0 +1,518 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamLens - AI 꿈 해석 서비스</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'night-primary': '#1a1b3a',
+                        'night-secondary': '#2d3561',
+                        'dream-purple': '#6366f1',
+                        'dream-purple-light': '#8b5cf6',
+                        'warm-gold': '#fbbf24',
+                        'warm-gold-dark': '#f59e0b'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'fadeIn': 'fadeIn 0.5s ease-in-out',
+                        'slideUp': 'slideUp 0.3s ease-out'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(99, 102, 241, 0.3)' },
+                            '100%': { boxShadow: '0 0 30px rgba(99, 102, 241, 0.6)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)' },
+                            '100%': { transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-['Inter'] transition-all duration-500 min-h-screen" id="app-body">
+    <!-- @COMPONENT: Header [navigation with logo, language toggle, theme toggle] -->
+    <header class="relative z-50 px-4 py-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-dream-purple to-dream-purple-light flex items-center justify-center">
+                    <i class="fas fa-moon text-white text-lg"></i>
+                </div>
+                <h1 class="text-2xl font-bold" data-bind="app.title">
+                    <span class="bg-gradient-to-r from-dream-purple to-dream-purple-light bg-clip-text text-transparent">DreamLens</span>
+                </h1>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center space-x-4">
+                <!-- Language Toggle -->
+                <button class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300" data-event="click:toggleLanguage" id="lang-toggle">
+                    <i class="fas fa-globe text-sm"></i>
+                    <span class="text-sm font-medium" data-bind="controls.language">한국어</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="p-2 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300" data-event="click:toggleTheme" id="theme-toggle">
+                    <i class="fas fa-sun text-lg" id="theme-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    <!-- @END_COMPONENT: Header -->
+
+    <!-- Main Container -->
+    <main class="relative px-4 pb-20">
+        <div class="max-w-4xl mx-auto">
+            <!-- @COMPONENT: Hero Section [main title and subtitle] -->
+            <section class="text-center mb-16 animate-fadeIn">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight" data-bind="hero.title">
+                    <span class="block text-white/90">당신의 꿈을</span>
+                    <span class="block bg-gradient-to-r from-warm-gold to-warm-gold-dark bg-clip-text text-transparent">해석해 드려요</span>
+                </h2>
+                <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed" data-bind="hero.subtitle">
+                    AI가 분석하는 꿈의 의미와 당신을 위한 따뜻한 메시지를 만나보세요
+                </p>
+            </section>
+            <!-- @END_COMPONENT: Hero Section -->
+
+            <!-- @COMPONENT: Dream Input Card [main input form] -->
+            <section class="mb-12">
+                <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl animate-float">
+                    <div class="mb-8">
+                        <label class="block text-white/90 text-lg font-semibold mb-4" data-bind="form.label">
+                            어떤 꿈을 꾸셨나요?
+                        </label>
+                        <textarea 
+                            class="w-full h-48 p-6 rounded-2xl bg-white/5 border border-white/20 text-white placeholder-white/50 text-lg leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-dream-purple focus:border-transparent transition-all duration-300" 
+                            placeholder="꿈에서 본 모든 것을 자세히 적어주세요. 어떤 사람이 나왔는지, 어떤 장소였는지, 어떤 감정을 느꼈는지..." 
+                            data-bind="form.input"
+                            data-mock="true"
+                            id="dream-input"></textarea>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button class="group relative px-12 py-4 bg-gradient-to-r from-dream-purple to-dream-purple-light rounded-2xl text-white font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-glow" data-event="click:interpretDream" id="interpret-btn">
+                            <span class="flex items-center space-x-3" data-bind="form.button">
+                                <i class="fas fa-magic"></i>
+                                <span>꿈 해석하기</span>
+                            </span>
+                            <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-dream-purple-light to-dream-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: Dream Input Card -->
+
+            <!-- @COMPONENT: Loading State [shown during interpretation] -->
+            <section class="mb-12 hidden" id="loading-section">
+                <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-12 border border-white/10 text-center">
+                    <div class="animate-spin w-12 h-12 border-3 border-dream-purple border-t-transparent rounded-full mx-auto mb-6"></div>
+                    <p class="text-white/80 text-lg" data-bind="loading.message">AI가 당신의 꿈을 분석하고 있습니다...</p>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: Loading State -->
+
+            <!-- @COMPONENT: Dream Interpretation Result [main result display] -->
+            <section class="mb-12 hidden animate-fadeIn" id="result-section">
+                <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+                    <!-- Result Header -->
+                    <div class="text-center mb-10">
+                        <div class="w-16 h-16 bg-gradient-to-br from-warm-gold to-warm-gold-dark rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white/90 mb-2" data-bind="result.title">꿈 해석 결과</h3>
+                        <p class="text-white/60" data-bind="result.timestamp">2024년 12월 19일</p>
+                    </div>
+
+                    <!-- Interpretation Content -->
+                    <div class="space-y-8">
+                        <!-- Main Interpretation -->
+                        <div class="bg-white/5 rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-xl font-semibold text-white/90 mb-4 flex items-center" data-bind="result.interpretation.title">
+                                <i class="fas fa-brain text-dream-purple mr-3"></i>
+                                심리적 해석
+                            </h4>
+                            <p class="text-white/80 leading-relaxed" data-bind="result.interpretation.content" data-mock="true">
+                                당신의 꿈은 현재 인생에서 새로운 변화를 갈망하고 있음을 나타냅니다. 꿈 속에서 나타난 상황들은 내재된 잠재력과 성장 욕구를 상징하며, 이는 매우 긍정적인 신호입니다. 특히 꿈에서 느꼈던 감정들은 당신이 현실에서 추구하고자 하는 목표와 깊은 연관이 있습니다.
+                            </p>
+                        </div>
+
+                        <!-- Warm Message -->
+                        <div class="bg-gradient-to-r from-warm-gold/10 to-warm-gold-dark/10 rounded-2xl p-6 border border-warm-gold/20">
+                            <h4 class="text-xl font-semibold text-warm-gold mb-4 flex items-center" data-bind="result.message.title">
+                                <i class="fas fa-heart text-warm-gold mr-3"></i>
+                                따뜻한 메시지
+                            </h4>
+                            <p class="text-white/80 leading-relaxed" data-bind="result.message.content" data-mock="true">
+                                지금 이 순간의 당신은 충분히 아름답고 가치 있는 존재입니다. 꿈이 전해주는 메시지를 통해 자신을 더욱 믿고 앞으로 나아가세요. 모든 변화는 시간이 필요하니 조급해하지 마시고, 작은 한 걸음씩 차근차근 나아가시길 바랍니다. 당신의 꿈과 현실이 아름답게 조화를 이루는 그날이 곧 올 것입니다.
+                            </p>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                            <button class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 text-white hover:bg-white/20 transition-all duration-300" data-event="click:saveResult">
+                                <i class="fas fa-bookmark"></i>
+                                <span data-bind="result.actions.save">결과 저장</span>
+                            </button>
+                            <button class="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-dream-purple/20 backdrop-blur-sm rounded-xl border border-dream-purple/30 text-white hover:bg-dream-purple/30 transition-all duration-300" data-event="click:newInterpretation">
+                                <i class="fas fa-plus"></i>
+                                <span data-bind="result.actions.new">새로운 해석</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: Dream Interpretation Result -->
+
+            <!-- @COMPONENT: Share Section [social sharing buttons] -->
+            <section class="mb-12 hidden" id="share-section">
+                <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                    <h4 class="text-lg font-semibold text-white/90 mb-4 text-center" data-bind="share.title">결과 공유하기</h4>
+                    <div class="flex justify-center space-x-4">
+                        <button class="p-3 bg-blue-500/20 rounded-xl border border-blue-500/30 text-blue-400 hover:bg-blue-500/30 transition-all duration-300" data-event="click:shareTwitter">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </button>
+                        <button class="p-3 bg-blue-600/20 rounded-xl border border-blue-600/30 text-blue-400 hover:bg-blue-600/30 transition-all duration-300" data-event="click:shareFacebook">
+                            <i class="fab fa-facebook text-lg"></i>
+                        </button>
+                        <button class="p-3 bg-yellow-400/20 rounded-xl border border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/30 transition-all duration-300" data-event="click:shareKakao">
+                            <i class="fas fa-comment text-lg"></i>
+                        </button>
+                        <button class="p-3 bg-green-500/20 rounded-xl border border-green-500/30 text-green-400 hover:bg-green-500/30 transition-all duration-300" data-event="click:copyLink">
+                            <i class="fas fa-link text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- @END_COMPONENT: Share Section -->
+
+            <!-- @COMPONENT: History Section [previous interpretations] -->
+            <section class="mb-12">
+                <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                    <h3 class="text-xl font-semibold text-white/90 mb-6 flex items-center" data-bind="history.title">
+                        <i class="fas fa-history text-dream-purple mr-3"></i>
+                        최근 해석 기록
+                    </h3>
+                    
+                    <!-- @MAP: historyItems.map(item => ( -->
+                    <div class="space-y-4" data-mock="true">
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <p class="text-white/70 text-sm">2024.12.18</p>
+                                <button class="text-white/50 hover:text-white/80 transition-colors">
+                                    <i class="fas fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+                            <p class="text-white/80 line-clamp-2">바다에서 수영하는 꿈을 꿨는데, 물이 너무 맑고 아름다웠습니다...</p>
+                        </div>
+                        
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all duration-300 cursor-pointer">
+                            <div class="flex justify-between items-start mb-2">
+                                <p class="text-white/70 text-sm">2024.12.17</p>
+                                <button class="text-white/50 hover:text-white/80 transition-colors">
+                                    <i class="fas fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+                            <p class="text-white/80 line-clamp-2">높은 산 위에서 친구들과 함께 있는 꿈이었습니다. 경치가 정말 좋았어요...</p>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </section>
+            <!-- @END_COMPONENT: History Section -->
+        </div>
+    </main>
+
+    <!-- @COMPONENT: Footer [app info and links] -->
+    <footer class="relative px-4 py-12 border-t border-white/10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="mb-8">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-dream-purple to-dream-purple-light flex items-center justify-center">
+                        <i class="fas fa-moon text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-semibold bg-gradient-to-r from-dream-purple to-dream-purple-light bg-clip-text text-transparent">DreamLens</span>
+                </div>
+                <p class="text-white/60 max-w-md mx-auto" data-bind="footer.description">
+                    AI 기술로 당신의 꿈을 분석하고 의미있는 인사이트를 제공합니다
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="text-white/60 hover:text-white/90 transition-colors" data-bind="footer.links.privacy">개인정보처리방침</a>
+                <a href="#" class="text-white/60 hover:text-white/90 transition-colors" data-bind="footer.links.terms">이용약관</a>
+                <a href="#" class="text-white/60 hover:text-white/90 transition-colors" data-bind="footer.links.contact">문의하기</a>
+            </div>
+            
+            <p class="text-white/40 text-sm" data-bind="footer.copyright">
+                © 2024 DreamLens. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- Dynamic Background -->
+    <!-- A serene night sky with stars and gentle purple-blue gradients -->
+    <div class="fixed inset-0 -z-10" id="background-container">
+        <div class="absolute inset-0 bg-gradient-to-br from-night-primary via-night-secondary to-dream-purple"></div>
+        <div class="absolute inset-0 opacity-30" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-night-primary/50 to-transparent"></div>
+    </div>
+
+    <!-- @STATE: isDarkMode:boolean = true -->
+    <!-- @STATE: currentLanguage:string = 'ko' -->
+    <!-- @STATE: dreamText:string = '' -->
+    <!-- @STATE: interpretationResult:object = null -->
+    <!-- @STATE: isLoading:boolean = false -->
+
+    <script>
+        // Application state and functionality
+        (function() {
+            'use strict';
+            
+            // Application state
+            let appState = {
+                isDarkMode: true,
+                currentLanguage: 'ko',
+                dreamText: '',
+                interpretationResult: null,
+                isLoading: false
+            };
+
+            // Translations
+            const translations = {
+                ko: {
+                    app: { title: 'DreamLens' },
+                    controls: { language: '한국어' },
+                    hero: {
+                        title: '당신의 꿈을\n해석해 드려요',
+                        subtitle: 'AI가 분석하는 꿈의 의미와 당신을 위한 따뜻한 메시지를 만나보세요'
+                    },
+                    form: {
+                        label: '어떤 꿈을 꾸셨나요?',
+                        button: '꿈 해석하기'
+                    },
+                    loading: { message: 'AI가 당신의 꿈을 분석하고 있습니다...' },
+                    result: {
+                        title: '꿈 해석 결과',
+                        interpretation: { title: '심리적 해석' },
+                        message: { title: '따뜻한 메시지' },
+                        actions: { save: '결과 저장', new: '새로운 해석' }
+                    },
+                    share: { title: '결과 공유하기' },
+                    history: { title: '최근 해석 기록' }
+                },
+                en: {
+                    app: { title: 'DreamLens' },
+                    controls: { language: 'English' },
+                    hero: {
+                        title: 'Interpret Your\nDreams',
+                        subtitle: 'Discover the meaning of your dreams with AI analysis and receive warm, personalized messages'
+                    },
+                    form: {
+                        label: 'What did you dream about?',
+                        button: 'Interpret Dream'
+                    },
+                    loading: { message: 'AI is analyzing your dream...' },
+                    result: {
+                        title: 'Dream Interpretation Result',
+                        interpretation: { title: 'Psychological Analysis' },
+                        message: { title: 'Warm Message' },
+                        actions: { save: 'Save Result', new: 'New Interpretation' }
+                    },
+                    share: { title: 'Share Result' },
+                    history: { title: 'Recent Interpretations' }
+                }
+            };
+
+            // Initialize app
+            function initializeApp() {
+                loadUserPreferences();
+                setupEventListeners();
+                updateUI();
+            }
+
+            // Load user preferences from localStorage
+            function loadUserPreferences() {
+                const savedTheme = localStorage.getItem('dreamlens-theme');
+                const savedLanguage = localStorage.getItem('dreamlens-language');
+                
+                if (savedTheme) {
+                    appState.isDarkMode = savedTheme === 'dark';
+                }
+                if (savedLanguage) {
+                    appState.currentLanguage = savedLanguage;
+                }
+            }
+
+            // Setup event listeners
+            function setupEventListeners() {
+                // Theme toggle
+                document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+                
+                // Language toggle
+                document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+                
+                // Dream interpretation
+                document.getElementById('interpret-btn').addEventListener('click', interpretDream);
+                
+                // New interpretation
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('[data-event*="newInterpretation"]')) {
+                        newInterpretation();
+                    }
+                });
+            }
+
+            // Toggle theme
+            function toggleTheme() {
+                appState.isDarkMode = !appState.isDarkMode;
+                localStorage.setItem('dreamlens-theme', appState.isDarkMode ? 'dark' : 'light');
+                updateTheme();
+            }
+
+            // Toggle language
+            function toggleLanguage() {
+                appState.currentLanguage = appState.currentLanguage === 'ko' ? 'en' : 'ko';
+                localStorage.setItem('dreamlens-language', appState.currentLanguage);
+                updateUI();
+            }
+
+            // Update theme
+            function updateTheme() {
+                const body = document.getElementById('app-body');
+                const icon = document.getElementById('theme-icon');
+                const background = document.getElementById('background-container');
+                
+                if (appState.isDarkMode) {
+                    body.className = body.className.replace(/bg-\S+/g, '');
+                    icon.className = 'fas fa-sun text-lg';
+                    background.innerHTML = `
+                        <div class="absolute inset-0 bg-gradient-to-br from-night-primary via-night-secondary to-dream-purple"></div>
+                        <div class="absolute inset-0 opacity-30" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080'); background-size: cover; background-position: center;"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-night-primary/50 to-transparent"></div>
+                    `;
+                } else {
+                    body.className += ' bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50';
+                    icon.className = 'fas fa-moon text-lg';
+                    background.innerHTML = `
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"></div>
+                        <div class="absolute inset-0 opacity-20" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080'); background-size: cover; background-position: center;"></div>
+                    `;
+                }
+            }
+
+            // Update UI text based on current language
+            function updateUI() {
+                const currentTranslations = translations[appState.currentLanguage];
+                
+                // Update all elements with data-bind attributes
+                document.querySelectorAll('[data-bind]').forEach(element => {
+                    const bindPath = element.getAttribute('data-bind');
+                    const value = getNestedValue(currentTranslations, bindPath);
+                    if (value) {
+                        if (bindPath.includes('title') && value.includes('\n')) {
+                            element.innerHTML = value.split('\n').map((line, index) => 
+                                index === 0 ? `<span class="block text-white/90">${line}</span>` 
+                                : `<span class="block bg-gradient-to-r from-warm-gold to-warm-gold-dark bg-clip-text text-transparent">${line}</span>`
+                            ).join('');
+                        } else {
+                            element.textContent = value;
+                        }
+                    }
+                });
+                
+                updateTheme();
+            }
+
+            // Get nested object value by path
+            function getNestedValue(obj, path) {
+                return path.split('.').reduce((current, key) => current && current[key], obj);
+            }
+
+            // Interpret dream function
+            function interpretDream() {
+                const dreamInput = document.getElementById('dream-input');
+                const dreamText = dreamInput.value.trim();
+                
+                if (!dreamText) {
+                    alert(appState.currentLanguage === 'ko' ? '꿈 내용을 입력해주세요.' : 'Please enter your dream.');
+                    return;
+                }
+                
+                appState.dreamText = dreamText;
+                appState.isLoading = true;
+                
+                // Show loading state
+                document.getElementById('loading-section').classList.remove('hidden');
+                document.getElementById('result-section').classList.add('hidden');
+                document.getElementById('share-section').classList.add('hidden');
+                
+                // TODO: Implement OpenAI API call for dream interpretation
+                // Simulate API call with timeout
+                setTimeout(() => {
+                    showMockResult();
+                }, 3000);
+            }
+
+            // Show mock interpretation result
+            function showMockResult() {
+                appState.isLoading = false;
+                
+                // Hide loading, show results
+                document.getElementById('loading-section').classList.add('hidden');
+                document.getElementById('result-section').classList.remove('hidden');
+                document.getElementById('share-section').classList.remove('hidden');
+                
+                // Scroll to results
+                document.getElementById('result-section').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+
+            // Start new interpretation
+            function newInterpretation() {
+                document.getElementById('dream-input').value = '';
+                document.getElementById('result-section').classList.add('hidden');
+                document.getElementById('share-section').classList.add('hidden');
+                document.getElementById('dream-input').focus();
+                
+                // Scroll to input
+                document.getElementById('dream-input').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+
+            // Initialize app when DOM is loaded
+            document.addEventListener('DOMContentLoaded', initializeApp);
+
+            // TODO: Implement social sharing functionality
+            // TODO: Implement dream interpretation history
+            // TODO: Implement result saving to localStorage
+            // TODO: Integrate with OpenAI API for real dream interpretation
+            // TODO: Add multilingual support for interpretation results
+            
+        })();
+    </script>
+</body>
+</html>
