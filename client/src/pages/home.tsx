@@ -212,53 +212,65 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Menu Links - More compact */}
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            gap: '20px', 
-            marginBottom: '30px',
-            flexWrap: 'wrap'
-          }}>
-            <Link href="/privacy" style={{ 
-              color: '#ffffff', 
-              fontSize: '16px', 
-              fontWeight: 'bold',
-              textDecoration: 'none',
-              padding: '12px 24px',
-              backgroundColor: '#a855f7',
-              borderRadius: '25px',
-              display: 'inline-block',
-              transition: 'all 0.3s ease'
-            }}>
-              {t.footer.links.privacy}
-            </Link>
-            <Link href="/terms" style={{ 
-              color: '#ffffff', 
-              fontSize: '16px', 
-              fontWeight: 'bold',
-              textDecoration: 'none',
-              padding: '12px 24px',
-              backgroundColor: '#a855f7',
-              borderRadius: '25px',
-              display: 'inline-block',
-              transition: 'all 0.3s ease'
-            }}>
-              {t.footer.links.terms}
-            </Link>
-            <Link href="/contact" style={{ 
-              color: '#ffffff', 
-              fontSize: '16px', 
-              fontWeight: 'bold',
-              textDecoration: 'none',
-              padding: '12px 24px',
-              backgroundColor: '#a855f7',
-              borderRadius: '25px',
-              display: 'inline-block',
-              transition: 'all 0.3s ease'
-            }}>
-              {t.footer.links.contact}
-            </Link>
+          {/* Menu Links - Large and Simple */}
+          <div style={{ marginBottom: '30px' }}>
+            <div style={{ marginBottom: '15px' }}>
+              <Link href="/privacy">
+                <button style={{ 
+                  color: '#ffffff',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  padding: '15px 40px',
+                  backgroundColor: '#7c3aed',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  width: '300px',
+                  display: 'block',
+                  margin: '0 auto 15px auto'
+                }}>
+                  {t.footer.links.privacy}
+                </button>
+              </Link>
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <Link href="/terms">
+                <button style={{ 
+                  color: '#ffffff',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  padding: '15px 40px',
+                  backgroundColor: '#7c3aed',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  width: '300px',
+                  display: 'block',
+                  margin: '0 auto 15px auto'
+                }}>
+                  {t.footer.links.terms}
+                </button>
+              </Link>
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <Link href="/contact">
+                <button style={{ 
+                  color: '#ffffff',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  padding: '15px 40px',
+                  backgroundColor: '#7c3aed',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  width: '300px',
+                  display: 'block',
+                  margin: '0 auto 15px auto'
+                }}>
+                  {t.footer.links.contact}
+                </button>
+              </Link>
+            </div>
           </div>
 
           {/* Copyright */}
