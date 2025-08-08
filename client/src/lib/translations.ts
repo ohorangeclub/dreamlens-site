@@ -80,7 +80,7 @@ export const translations: Record<string, Translations> = {
       links: {
         privacy: '개인정보처리방침',
         terms: '이용약관',
-        contact: '문의하기'
+        contact: '광고문의'
       },
       copyright: '© 2024 DreamLens. All rights reserved.'
     },
@@ -125,7 +125,7 @@ export const translations: Record<string, Translations> = {
       links: {
         privacy: 'Privacy Policy',
         terms: 'Terms of Service',
-        contact: 'Contact Us'
+        contact: 'Advertising Inquiry'
       },
       copyright: '© 2024 DreamLens. All rights reserved.'
     },

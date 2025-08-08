@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'wouter';
 import { DreamInput } from '@/components/dream-input';
 import { DreamResult } from '@/components/dream-result';
 import { useLanguage } from '@/components/language-provider';
@@ -215,15 +216,21 @@ export default function Home() {
           </div>
           
           <div className="flex justify-center space-x-8 mb-8">
-            <a href="#" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
-              {t.footer.links.privacy}
-            </a>
-            <a href="#" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
-              {t.footer.links.terms}
-            </a>
-            <a href="#" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
-              {t.footer.links.contact}
-            </a>
+            <Link href="/privacy">
+              <a className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+                {t.footer.links.privacy}
+              </a>
+            </Link>
+            <Link href="/terms">
+              <a className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+                {t.footer.links.terms}
+              </a>
+            </Link>
+            <Link href="/contact">
+              <a className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+                {t.footer.links.contact}
+              </a>
+            </Link>
           </div>
           
           <p className="text-gray-500 dark:text-white/40 text-sm">
