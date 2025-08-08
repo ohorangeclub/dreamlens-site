@@ -1,15 +1,16 @@
+// server/services/gemini.ts
 import { GoogleGenAI } from "@google/genai";
 
 // DON'T DELETE THIS COMMENT
 // Follow these instructions when using this blueprint:
-// - Note that the newest Gemini model series is "gemini-2.5-flash" or gemini-2.5-pro"
+// - Note that the newest Gemini model series is "gemini-2.5-flash" or "gemini-2.5-pro"
 //   - do not change this unless explicitly requested by the user
 
-// This API key is from Gemini Developer API Key, not vertex AI API Key
-const apiKey = process.env.GEMINI_API_KEY;
+// 환경변수에서 API 키 가져오기 (Vercel dashboard에 설정 필요)
+const apiKey = process.env.GOOGLE_API_KEY;
 
 if (!apiKey) {
-  throw new Error("GEMINI_API_KEY is not defined in environment variables.");
+  throw new Error("GOOGLE_API_KEY is not defined in environment variables.");
 }
 
 const genai = new GoogleGenAI({ apiKey });
@@ -68,7 +69,7 @@ Approach the interpretation from a positive and constructive perspective, and wr
     });
 
     const result = JSON.parse(response.text || "{}");
-    
+
     if (!result.interpretation || !result.warmMessage) {
       throw new Error("Invalid response format from Gemini");
     }
