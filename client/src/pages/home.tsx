@@ -216,20 +216,14 @@ export default function Home() {
           </div>
           
           <div className="flex justify-center space-x-8 mb-8">
-            <Link href="/privacy">
-              <a className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
-                {t.footer.links.privacy}
-              </a>
+            <Link href="/privacy" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+              {t.footer.links.privacy}
             </Link>
-            <Link href="/terms">
-              <a className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
-                {t.footer.links.terms}
-              </a>
+            <Link href="/terms" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+              {t.footer.links.terms}
             </Link>
-            <Link href="/contact">
-              <a className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
-                {t.footer.links.contact}
-              </a>
+            <Link href="/contact" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+              {t.footer.links.contact}
             </Link>
           </div>
           
