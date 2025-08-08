@@ -199,7 +199,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="relative px-4 py-12 border-t border-white/10 dark:border-white/10">
+      <footer className="relative z-10 px-4 py-12 border-t border-white/10 dark:border-white/10 bg-white/5 dark:bg-black/20 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <div className="flex items-center justify-center space-x-3 mb-4">
@@ -215,14 +215,14 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="flex justify-center space-x-8 mb-8">
-            <Link href="/privacy" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8">
+            <Link href="/privacy" className="text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white/90 transition-colors font-medium px-2 py-1">
               {t.footer.links.privacy}
             </Link>
-            <Link href="/terms" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+            <Link href="/terms" className="text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white/90 transition-colors font-medium px-2 py-1">
               {t.footer.links.terms}
             </Link>
-            <Link href="/contact" className="text-gray-600 dark:text-white/60 hover:text-gray-900 dark:hover:text-white/90 transition-colors">
+            <Link href="/contact" className="text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white/90 transition-colors font-medium px-2 py-1">
               {t.footer.links.contact}
             </Link>
           </div>

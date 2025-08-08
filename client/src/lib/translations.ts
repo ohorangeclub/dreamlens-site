@@ -46,10 +46,10 @@ export interface Translations {
 
 export const translations: Record<string, Translations> = {
   ko: {
-    app: { title: 'DreamLens' },
+    app: { title: '드림렌즈' },
     controls: { language: '한국어' },
     hero: {
-      title: '당신의 꿈을\n해석해 드려요',
+      title: '당신의 꿈을\n들여다보는 꿈의 렌즈',
       subtitle: 'AI가 분석하는 꿈의 의미와 당신을 위한 따뜻한 메시지를 만나보세요'
     },
     form: {
@@ -94,7 +94,7 @@ export const translations: Record<string, Translations> = {
     app: { title: 'DreamLens' },
     controls: { language: 'English' },
     hero: {
-      title: 'Interpret Your\nDreams',
+      title: 'The Lens to\nLook Into Your Dreams',
       subtitle: 'Discover the meaning of your dreams with AI analysis and receive warm, personalized messages'
     },
     form: {
