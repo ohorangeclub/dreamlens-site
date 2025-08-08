@@ -204,7 +204,7 @@ export default function Home() {
           
           {/* Logo and Title */}
           <div style={{ marginBottom: '40px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#a855f7', marginBottom: '16px' }}>
+            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#cccccc', marginBottom: '16px' }}>
               {t.app.title}
             </h3>
             <p style={{ color: '#cccccc', fontSize: '16px' }}>
