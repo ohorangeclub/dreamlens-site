@@ -77,11 +77,10 @@ Approach the interpretation from a positive and constructive perspective, and wr
       interpretation: result.interpretation,
       warmMessage: result.warmMessage,
     };
-  } catch (error) {
-    console.error("Gemini API error:", error);
-    if (error instanceof Error) {
-      console.error("Error message:", error.message);
-    }
+  } catch (error: any) {
+    console.error("🔴 Gemini API 호출 중 오류 발생:");
+    console.error("📌 Error message:", error.message);
+    console.error("📦 Full error object:", error);
     throw new Error("Failed to interpret dream. Please try again later.");
   }
 }
