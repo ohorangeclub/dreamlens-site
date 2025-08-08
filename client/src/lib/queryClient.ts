@@ -18,6 +18,9 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
+  const fullUrl = baseUrl + url;
+  console.log("🔍 Fetching:", method, fullUrl); // ⬅️ 디버깅 추가
+
   const res = await fetch(baseUrl + url, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
