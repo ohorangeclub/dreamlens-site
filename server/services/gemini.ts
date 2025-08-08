@@ -79,6 +79,9 @@ Approach the interpretation from a positive and constructive perspective, and wr
     };
   } catch (error) {
     console.error("Gemini API error:", error);
+    if (error instanceof Error) {
+      console.error("Error message:", error.message);
+    }
     throw new Error("Failed to interpret dream. Please try again later.");
   }
 }
