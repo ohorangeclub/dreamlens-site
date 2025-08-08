@@ -198,49 +198,69 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16 mt-24">
-        <div className="max-w-6xl mx-auto px-4">
-          {/* Brand Section */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-dream-purple to-dream-purple-light flex items-center justify-center">
-                <i className="fas fa-moon text-white text-lg"></i>
-              </div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-dream-purple to-dream-purple-light bg-clip-text text-transparent">
-                {t.app.title}
-              </h3>
-            </div>
-            <p className="text-gray-300 max-w-md mx-auto">
+      {/* Footer - Simple and Clear */}
+      <footer style={{ backgroundColor: '#1a1a1a', color: 'white', padding: '60px 20px', marginTop: '100px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          
+          {/* Logo and Title */}
+          <div style={{ marginBottom: '40px' }}>
+            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#a855f7', marginBottom: '16px' }}>
+              {t.app.title}
+            </h3>
+            <p style={{ color: '#cccccc', fontSize: '16px' }}>
               {t.footer.description}
             </p>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex flex-wrap justify-center gap-8 mb-12">
-            <Link 
-              href="/privacy"
-              className="text-lg font-medium text-gray-300 hover:text-white hover:text-dream-purple-light transition-colors duration-300 border-b-2 border-transparent hover:border-dream-purple-light pb-1"
-            >
+          {/* Menu Links */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '40px', 
+            marginBottom: '40px',
+            flexWrap: 'wrap'
+          }}>
+            <Link href="/privacy" style={{ 
+              color: '#ffffff', 
+              fontSize: '18px', 
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              padding: '10px 20px',
+              backgroundColor: '#333333',
+              borderRadius: '8px',
+              border: '2px solid #a855f7'
+            }}>
               {t.footer.links.privacy}
             </Link>
-            <Link 
-              href="/terms"
-              className="text-lg font-medium text-gray-300 hover:text-white hover:text-dream-purple-light transition-colors duration-300 border-b-2 border-transparent hover:border-dream-purple-light pb-1"
-            >
+            <Link href="/terms" style={{ 
+              color: '#ffffff', 
+              fontSize: '18px', 
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              padding: '10px 20px',
+              backgroundColor: '#333333',
+              borderRadius: '8px',
+              border: '2px solid #a855f7'
+            }}>
               {t.footer.links.terms}
             </Link>
-            <Link 
-              href="/contact"
-              className="text-lg font-medium text-gray-300 hover:text-white hover:text-dream-purple-light transition-colors duration-300 border-b-2 border-transparent hover:border-dream-purple-light pb-1"
-            >
+            <Link href="/contact" style={{ 
+              color: '#ffffff', 
+              fontSize: '18px', 
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              padding: '10px 20px',
+              backgroundColor: '#333333',
+              borderRadius: '8px',
+              border: '2px solid #a855f7'
+            }}>
               {t.footer.links.contact}
             </Link>
           </div>
 
           {/* Copyright */}
-          <div className="text-center border-t border-gray-700 pt-8">
-            <p className="text-gray-400">
+          <div style={{ borderTop: '1px solid #444444', paddingTop: '20px' }}>
+            <p style={{ color: '#888888', fontSize: '14px' }}>
               © 2025 David Song. All rights reserved.
             </p>
           </div>
