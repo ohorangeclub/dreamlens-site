@@ -228,7 +228,7 @@ export default function Home() {
               padding: '10px 20px',
               backgroundColor: '#333333',
               borderRadius: '8px',
-              border: '2px solid #a855f7'
+              border: '2px solid #666666'
             }}>
               {t.footer.links.privacy}
             </Link>
@@ -240,7 +240,7 @@ export default function Home() {
               padding: '10px 20px',
               backgroundColor: '#333333',
               borderRadius: '8px',
-              border: '2px solid #a855f7'
+              border: '2px solid #666666'
             }}>
               {t.footer.links.terms}
             </Link>
@@ -252,7 +252,7 @@ export default function Home() {
               padding: '10px 20px',
               backgroundColor: '#333333',
               borderRadius: '8px',
-              border: '2px solid #a855f7'
+              border: '2px solid #666666'
             }}>
               {t.footer.links.contact}
             </Link>
