@@ -199,12 +199,12 @@ export default function Home() {
       </main>
 
       {/* Footer - Simple and Clear */}
-      <footer style={{ backgroundColor: '#1a1a1a', color: 'white', padding: '40px 20px', marginTop: '60px' }}>
+      <footer style={{ backgroundColor: '#1a1a1a', color: 'white', padding: '60px 20px', marginTop: '100px' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
           
           {/* Logo and Title */}
-          <div style={{ marginBottom: '30px' }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#a855f7', marginBottom: '12px' }}>
+          <div style={{ marginBottom: '40px' }}>
+            <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#a855f7', marginBottom: '16px' }}>
               {t.app.title}
             </h3>
             <p style={{ color: '#cccccc', fontSize: '16px' }}>
@@ -212,65 +212,50 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Menu Links - Large and Simple */}
-          <div style={{ marginBottom: '30px' }}>
-            <div style={{ marginBottom: '15px' }}>
-              <Link href="/privacy">
-                <button style={{ 
-                  color: '#ffffff',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  padding: '15px 40px',
-                  backgroundColor: '#7c3aed',
-                  border: 'none',
-                  borderRadius: '10px',
-                  cursor: 'pointer',
-                  width: '300px',
-                  display: 'block',
-                  margin: '0 auto 15px auto'
-                }}>
-                  {t.footer.links.privacy}
-                </button>
-              </Link>
-            </div>
-            <div style={{ marginBottom: '15px' }}>
-              <Link href="/terms">
-                <button style={{ 
-                  color: '#ffffff',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  padding: '15px 40px',
-                  backgroundColor: '#7c3aed',
-                  border: 'none',
-                  borderRadius: '10px',
-                  cursor: 'pointer',
-                  width: '300px',
-                  display: 'block',
-                  margin: '0 auto 15px auto'
-                }}>
-                  {t.footer.links.terms}
-                </button>
-              </Link>
-            </div>
-            <div style={{ marginBottom: '15px' }}>
-              <Link href="/contact">
-                <button style={{ 
-                  color: '#ffffff',
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  padding: '15px 40px',
-                  backgroundColor: '#7c3aed',
-                  border: 'none',
-                  borderRadius: '10px',
-                  cursor: 'pointer',
-                  width: '300px',
-                  display: 'block',
-                  margin: '0 auto 15px auto'
-                }}>
-                  {t.footer.links.contact}
-                </button>
-              </Link>
-            </div>
+          {/* Menu Links */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '40px', 
+            marginBottom: '40px',
+            flexWrap: 'wrap'
+          }}>
+            <Link href="/privacy" style={{ 
+              color: '#ffffff', 
+              fontSize: '18px', 
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              padding: '10px 20px',
+              backgroundColor: '#333333',
+              borderRadius: '8px',
+              border: '2px solid #a855f7'
+            }}>
+              {t.footer.links.privacy}
+            </Link>
+            <Link href="/terms" style={{ 
+              color: '#ffffff', 
+              fontSize: '18px', 
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              padding: '10px 20px',
+              backgroundColor: '#333333',
+              borderRadius: '8px',
+              border: '2px solid #a855f7'
+            }}>
+              {t.footer.links.terms}
+            </Link>
+            <Link href="/contact" style={{ 
+              color: '#ffffff', 
+              fontSize: '18px', 
+              fontWeight: 'bold',
+              textDecoration: 'none',
+              padding: '10px 20px',
+              backgroundColor: '#333333',
+              borderRadius: '8px',
+              border: '2px solid #a855f7'
+            }}>
+              {t.footer.links.contact}
+            </Link>
           </div>
 
           {/* Copyright */}
