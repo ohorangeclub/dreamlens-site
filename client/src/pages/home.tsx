@@ -199,37 +199,51 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 px-4 py-12 border-t border-white/20 dark:border-white/20 bg-gradient-to-b from-transparent to-white/10 dark:to-black/20">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-8">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-dream-purple to-dream-purple-light flex items-center justify-center">
-                <i className="fas fa-moon text-white text-sm"></i>
+      <footer className="bg-gray-900 text-white py-16 mt-24">
+        <div className="max-w-6xl mx-auto px-4">
+          {/* Brand Section */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center space-x-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-dream-purple to-dream-purple-light flex items-center justify-center">
+                <i className="fas fa-moon text-white text-lg"></i>
               </div>
-              <span className="text-lg font-semibold bg-gradient-to-r from-dream-purple to-dream-purple-light bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-dream-purple to-dream-purple-light bg-clip-text text-transparent">
                 {t.app.title}
-              </span>
+              </h3>
             </div>
-            <p className="text-gray-600 dark:text-white/60 max-w-md mx-auto text-sm">
+            <p className="text-gray-300 max-w-md mx-auto">
               {t.footer.description}
             </p>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 bg-white/10 dark:bg-white/5 rounded-xl p-4 border border-white/20 dark:border-white/10">
-            <Link href="/privacy" className="text-gray-800 dark:text-white/80 hover:text-dream-purple dark:hover:text-dream-purple-light transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10">
+
+          {/* Navigation Links */}
+          <div className="flex flex-wrap justify-center gap-8 mb-12">
+            <Link 
+              href="/privacy"
+              className="text-lg font-medium text-gray-300 hover:text-white hover:text-dream-purple-light transition-colors duration-300 border-b-2 border-transparent hover:border-dream-purple-light pb-1"
+            >
               {t.footer.links.privacy}
             </Link>
-            <Link href="/terms" className="text-gray-800 dark:text-white/80 hover:text-dream-purple dark:hover:text-dream-purple-light transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10">
+            <Link 
+              href="/terms"
+              className="text-lg font-medium text-gray-300 hover:text-white hover:text-dream-purple-light transition-colors duration-300 border-b-2 border-transparent hover:border-dream-purple-light pb-1"
+            >
               {t.footer.links.terms}
             </Link>
-            <Link href="/contact" className="text-gray-800 dark:text-white/80 hover:text-dream-purple dark:hover:text-dream-purple-light transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10">
+            <Link 
+              href="/contact"
+              className="text-lg font-medium text-gray-300 hover:text-white hover:text-dream-purple-light transition-colors duration-300 border-b-2 border-transparent hover:border-dream-purple-light pb-1"
+            >
               {t.footer.links.contact}
             </Link>
           </div>
-          
-          <p className="text-gray-500 dark:text-white/40 text-sm">
-            {t.footer.copyright}
-          </p>
+
+          {/* Copyright */}
+          <div className="text-center border-t border-gray-700 pt-8">
+            <p className="text-gray-400">
+              © 2025 David Song. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
     </>

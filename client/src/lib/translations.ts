@@ -82,7 +82,7 @@ export const translations: Record<string, Translations> = {
         terms: '이용약관',
         contact: '광고문의'
       },
-      copyright: '© 2024 DreamLens. All rights reserved.'
+      copyright: '© 2025 David Song. All rights reserved.'
     },
     errors: {
       minLength: '꿈 내용을 최소 10자 이상 입력해주세요.',
@@ -127,7 +127,7 @@ export const translations: Record<string, Translations> = {
         terms: 'Terms of Service',
         contact: 'Advertising Inquiry'
       },
-      copyright: '© 2024 DreamLens. All rights reserved.'
+      copyright: '© 2025 David Song. All rights reserved.'
     },
     errors: {
       minLength: 'Please enter at least 10 characters for your dream.',
