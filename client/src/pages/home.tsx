@@ -134,7 +134,7 @@ export default function Home() {
       </header>
 
       {/* Main */}
-      <main className="relative px-4 pb-20">
+      <main className="relative px-4 pb-8">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <section className="text-center mb-16 animate-fadeIn">
@@ -199,7 +199,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 px-4 py-12 border-t border-white/10 dark:border-white/10 bg-white/5 dark:bg-black/20 backdrop-blur-sm">
+      <footer className="mt-16 px-4 py-12 border-t border-white/20 dark:border-white/20 bg-gradient-to-b from-transparent to-white/10 dark:to-black/20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <div className="flex items-center justify-center space-x-3 mb-4">
@@ -210,19 +210,19 @@ export default function Home() {
                 {t.app.title}
               </span>
             </div>
-            <p className="text-gray-600 dark:text-white/60 max-w-md mx-auto">
+            <p className="text-gray-600 dark:text-white/60 max-w-md mx-auto text-sm">
               {t.footer.description}
             </p>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8">
-            <Link href="/privacy" className="text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white/90 transition-colors font-medium px-2 py-1">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 bg-white/10 dark:bg-white/5 rounded-xl p-4 border border-white/20 dark:border-white/10">
+            <Link href="/privacy" className="text-gray-800 dark:text-white/80 hover:text-dream-purple dark:hover:text-dream-purple-light transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10">
               {t.footer.links.privacy}
             </Link>
-            <Link href="/terms" className="text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white/90 transition-colors font-medium px-2 py-1">
+            <Link href="/terms" className="text-gray-800 dark:text-white/80 hover:text-dream-purple dark:hover:text-dream-purple-light transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10">
               {t.footer.links.terms}
             </Link>
-            <Link href="/contact" className="text-gray-700 dark:text-white/70 hover:text-gray-900 dark:hover:text-white/90 transition-colors font-medium px-2 py-1">
+            <Link href="/contact" className="text-gray-800 dark:text-white/80 hover:text-dream-purple dark:hover:text-dream-purple-light transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/20 dark:hover:bg-white/10">
               {t.footer.links.contact}
             </Link>
           </div>
