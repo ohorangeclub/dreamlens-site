@@ -6,7 +6,13 @@ import { GoogleGenAI } from "@google/genai";
 //   - do not change this unless explicitly requested by the user
 
 // This API key is from Gemini Developer API Key, not vertex AI API Key
-const genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "your-gemini-api-key-here" });
+const apiKey = process.env.GEMINI_API_KEY;
+
+if (!apiKey) {
+  throw new Error("GEMINI_API_KEY is not defined in environment variables.");
+}
+
+const genai = new GoogleGenAI({ apiKey });
 
 export interface DreamInterpretationResult {
   interpretation: string;
